@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void afficher(int liste[], int taille){
+void afficher1(int liste[], int taille){
 	int i=0;
 	for(i=0 ; i<taille ; i++){
 		printf("%d\n ",liste[i] );
@@ -33,12 +33,3 @@ void ajoute_apres(int dest[], int taille_dest, int src[], int taille_src){
 	}
 }
 
-
-int main(void){
-	int tab1 [5] = {1,2,3,4,5};
-	int dest[10];		
-	afficher(tab1,sizeof(tab1)/sizeof(tab1[0]));
-	ajoute_apres(dest,5,tab1,5);
-	afficher(dest,sizeof(dest)/sizeof(dest[0]));
-	return 0;
-}

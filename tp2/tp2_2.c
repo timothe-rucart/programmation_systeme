@@ -1,13 +1,10 @@
 #include <stdio.h>
+#include "tp2_2.h"
 
-struct rat
-{
-	int den;
-	int num;
 
-}r1,r2,r3;
 
- struct rat rat_produit(struct rat n1, struct rat n2){
+ 
+struct rat rat_produit(struct rat n1, struct rat n2){
 	struct rat res ;
 	res.den = n1.den * n2.den;
 	res.num = n1.num * n2.num;
@@ -15,20 +12,36 @@ struct rat
 }
 
 
+struct rat rat_somme(struct rat n1, struct rat n2){
+	struct rat res;
+	if(n1.den == n2.den){
+		res.num = n1.num + n2.num;
+		res.den = n1.den;
+	}else{
+		res.num = n1.den * n2.num + n1.num *n2.den;
+		res.den = n1.den * n2.den;
+	}
+	return res;
+
+}
 
 
+struct rat rat_plus_petit(struct rat list[]){
+	struct rat min = list[0];
+	int i = 1;
+
+	while (list[i].den != 0 ){	
+		if(min.den/min.num > list[i].den/list[i].num){
+			min.den = list[i].den;
+			min.num = list[i].num;
+		}	
+		printf("yo");	
+	}	
+	return min;
+}
 
 
+void afficher(struct rat r3){
+	printf("%d / %d \n",r3.num,r3.den);
 
-
-
-int main(void){
-	struct rat r1 = {2,3};
-	struct rat r2 = {2,2};
-	rat_produit(r1,r2);
-	int n = rat_produit(r1,r2).den;
-	//struct rat r3 = {rat_produit(r1,r2).den,rat_produit(r1,r2).num};
-	
-	//printf()
-	return 0;
 }
