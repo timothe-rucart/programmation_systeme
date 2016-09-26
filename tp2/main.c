@@ -8,12 +8,14 @@ int main(void){
 	struct rat list[3];
 
 	int i;
-	list[0].den =0; 
-	list[0].num=1:
-	for(i=1 ; i<3 ; i++){
+
+	for(i=0 ; i<2 ; i++){
 		list[i].den = i+4;
 		list[i].num = i+5;		
 	}
+	
+	list[2].den =0; 
+	list[2].num=1;
 
 
 	struct rat r4 = rat_plus_petit(list);
