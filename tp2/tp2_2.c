@@ -28,14 +28,14 @@ struct rat rat_somme(struct rat n1, struct rat n2){
 
 struct rat rat_plus_petit(struct rat list[]){
 	struct rat min = list[0];
-	int i = 1;
+	int i = 0;
 
 	while (list[i].den != 0 ){	
 		if(min.den/min.num > list[i].den/list[i].num){
 			min.den = list[i].den;
 			min.num = list[i].num;
 		}	
-		printf("yo");	
+		i++;
 	}	
 	return min;
 }
