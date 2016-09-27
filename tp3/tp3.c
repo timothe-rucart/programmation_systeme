@@ -38,3 +38,21 @@ int mon_strcmp(const char * s1, const char * s2){
 
 	return cmp;
  }
+
+ int mon_strncmp(const char * s1, const char * s2, int n){
+
+	int ts1 = mon_strlen2(s1);
+	int ts2 = mon_strlen2(s2);
+	int i=0;
+	int cmp=0;
+	
+	while( i<ts1 && i<ts2 && cmp ==0 && i<n){
+		if(*(s1+i)> *(s2+i))
+			cmp ++;
+		else if( *(s1+i) < *(s2+i))
+			cmp --;
+		i++;
+	}
+
+	return cmp;
+ }

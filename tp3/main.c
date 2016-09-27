@@ -4,7 +4,7 @@
 int main(void){
 
 	char s1[] = "salut";
-	char s2[] = "yo";
+	char s2[] = "salot";
 	//printf("%d \n" ,mon_strlen(s1));
 
 	
@@ -13,7 +13,8 @@ int main(void){
 	//printf("%d\n", *s1 ); 	// donne le numero ascii
 	//printf("%d \n",mon_strlen2(c1));
 
-	printf("%d\n",mon_strcmp(c1,c2) );
+	//printf("%d\n",mon_strcmp(c1,c2) );
+	printf("%d\n",mon_strncmp(c1,c2,4) );
 
 	return 0;
 }
