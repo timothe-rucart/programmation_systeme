@@ -14,7 +14,11 @@ int main(void){
 	//printf("%d \n",mon_strlen2(c1));
 
 	//printf("%d\n",mon_strcmp(c1,c2) );
-	printf("%d\n",mon_strncmp(c1,c2,4) );
+	//printf("%d\n",mon_strncmp(c1,c2,4) ); question 4
+
+	char * c3 = s1;
+	mon_strcat(c3,c2);
+	printf("%c\n",c3 );
 
 	return 0;
 }

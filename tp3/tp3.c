@@ -39,7 +39,7 @@ int mon_strcmp(const char * s1, const char * s2){
 	return cmp;
  }
 
- int mon_strncmp(const char * s1, const char * s2, int n){
+int mon_strncmp(const char * s1, const char * s2, int n){
 
 	int ts1 = mon_strlen2(s1);
 	int ts2 = mon_strlen2(s2);
@@ -56,3 +56,17 @@ int mon_strcmp(const char * s1, const char * s2){
 
 	return cmp;
  }
+
+char *mon_strcat(char *s1, const char *s2){
+
+	int ts1 = mon_strlen2(s1);
+	int i=0;
+
+	while( *(s2+i)!='\0'){
+		*(s1+ts1+i) = *(s2+i);
+		i++;
+	}
+	*(s1+ts1+i)= *(s2 + i);
+
+	return s1;
+}
