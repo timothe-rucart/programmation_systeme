@@ -6,28 +6,15 @@
 
 char * miroir (const char *s){
 
-	char * p = NULL;
-	int n = strlen(s)-1;
-	s = s+n;
-	p = malloc(n) ;
-
-
-	if(p==NULL){
-		printf("Allocation impossible");
-		return NULL;
+	char* res;
+	int i = strlen(s);
+	int j;
+	res = malloc(i*sizeof(char)+1);
+	for(j=i ; j>0 ;j--){
+		res[i-j]=s[j-1];
 	}
-	else{
-		while(*(s) !='\0'){
-			*p = *s;
-			p++;
-			s--;
-
-		}
-	}
-
-	*(p+n)='\0';
-
-	return (p-n)-1;
+	res[i]='\0';
+	return res;
 }
 
 char * saisie (){
@@ -47,5 +34,7 @@ char * saisie (){
 		}
 
 	}
+	res = realloc(res,i+1);
+	res[i] = '\0';
 	return res;
 }

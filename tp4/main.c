@@ -57,7 +57,9 @@ int main(int argc, char ** argv){
 				printf("pas de mot a retourner en parametre\n");
 
 			} else if (s && !m) {
-				printf("%s\n", saisie());
+				sai = saisie();
+				printf("%s\n", sai);
+				free(sai);
 
 			} else if (s && m){ 				
 				sai = saisie();
