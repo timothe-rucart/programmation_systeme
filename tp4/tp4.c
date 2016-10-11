@@ -33,14 +33,18 @@ char * miroir (const char *s){
 char * saisie (){
 
 	char clavier ='a';
-	char * res  = malloc(0);
+	int n = 128;
+	char * res  = malloc(n);
 	int i = 0;
 
 	while( !isspace(clavier)){
 		clavier = getchar();
 		res[i] = clavier;
-		i++;
-		res = realloc(res,i);
+		i++;		
+		if(i==n){
+			n *= 2;
+			res= realloc(res,n);
+		}
 
 	}
 	return res;

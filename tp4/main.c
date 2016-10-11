@@ -7,62 +7,21 @@
 
 int main(int argc, char ** argv){
 
-	/*char tab [] = "ms"; // tableau avec les options disponibles
-	char * s1;
-	int c=0;
-	int m=0;
-	int s=0;
-
-	close(2);
-	printf("%d \n",getopt(argc, argv, tab));
-
-	while( (c == getopt(argc, argv, tab)) != EOF){
-		
-		if((char) c == 'm' && !m)
-			m=1;
-		if((char) c == 's' && !s)
-			s=1;
-	}
-	printf("%d  %d\n",m,s );
-
-		if(m && s)
-			printf("%s\n",miroir(saisie()) );
-		else if(s)
-			printf("%s\n",saisie() );
-		else if(m){
-			s1 = argv[optind];
-			if(s1 =='\0')
-				printf("mauvaise utilisation");
-			else
-				printf("%s\n",miroir(s1) );
-		}
-		else 
-			printf("mauvaise utilisation");
-	return 0;*/
-
-
-
-			/*char *s= "Sidious";
-
-	printf("%s\n", miroir(s));
-	printf("%s\n", saisie());
-	return 0;*/
-
 	int i=0;
 	int m=0;
 	int s=0;
 	int arg=0;
+	char * mir ;
+	char * sai ;
 
-	for (i=1; i<argc; i++) 
-	{
-		/*if 
-		{
-			printf("mauvaise utilisation\n");
-			return 1;
-		} else {*/
+	char chaines1 [] = "-m";
+	char chaines2 [] = "-s";
+	char chaines3 [] = "-ms";
+	char chaines4 [] = "-sm";
+
 
 			for (i=1; i<argc; i++) {
-				if (strchr(argv[i], '-')!=NULL && strchr(argv[i], 'm')!=NULL) {
+				/*if (strchr(argv[i], '-')!=NULL && strchr(argv[i], 'm')!=NULL) {
 					m=1;
 				}
 				if (strchr(argv[i], '-')!=NULL && strchr(argv[i], 's')!=NULL) {
@@ -70,23 +29,46 @@ int main(int argc, char ** argv){
 				}
 				if (strchr(argv[i], '-')==NULL && arg==0) {
 					arg=i;
-				} 
+				} */
+				if (strcmp(argv[i],chaines1) ==0){
+					m++;
+				}
+				if (strcmp(argv[i],chaines2) ==0){
+					s++;
+				}
+				 if (strcmp(argv[i],chaines3) ==0  || (strcmp(argv[i], chaines4)==0)){
+					s++;
+					m++;					
+				}
+				if (strchr(argv[i],'-')==NULL && arg == 0){
+					arg = i;
+				}
+
 			}
 
+
 			if (m && !s) { //Si just m est prÃ©sent	
-			printf("%s\n", miroir(argv[arg]));
-			
+			if(arg != 0){
+				mir = miroir(argv[arg]);
+				printf("%s\n", mir);
+				free(mir);
+			}
+			else
+				printf("pas de mot a retourner en parametre\n");
 
 			} else if (s && !m) {
 				printf("%s\n", saisie());
 
 			} else if (s && m){ 				
-				char *s1 = saisie();
-				printf("%s\n", miroir(s1));
+				sai = saisie();
+				mir = miroir(sai);
+				printf("%s\n", mir);
+				free(sai);
+				free(mir);
 			} else {
-				printf ("mauvaise utilisation");
+				printf ("mauvaise utilisation \n");
 			}
-		}
+		
 
 	
 	return 0;
