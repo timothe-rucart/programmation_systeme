@@ -52,7 +52,7 @@ void noir_et_blanc(entete_bmp *entete, unsigned char *pixels){
 
 void moitie(entete_bmp *entete, unsigned char *pixels, int sup){
   
-  int dataSize = entete->bitmap.taille_donnees_image;
+  /*int dataSize = entete->bitmap.taille_donnees_image;
   int hauteur = entete->bitmap.hauteur;
   int i = 0;
   int j = 0;
@@ -75,18 +75,17 @@ void moitie(entete_bmp *entete, unsigned char *pixels, int sup){
     hauteur = (entete->bitmap.hauteur - hauteur);
   }
   entete->bitmap.hauteur = hauteur;
-  entete->fichier.taille_fichier = newSize + entete->bitmap.taille_entete + (entete->fichier.offset_donnees - entete->bitmap.taille_entete);
-}
+  entete->fichier.taille_fichier = newSize + entete->bitmap.taille_entete + (entete->fichier.offset_donnees - entete->bitmap.taille_entete);*/
 
 
-/*void moitie(entete_bmp *entete, unsigned char *pixels, int sup){
-  int hauteurNew = entete->bitmap.hauteur/2;
-  int dataSize = taille_ligne(entete) * hauteurNew;
-  entete->bitmap.hauteur = hauteurNew;
+  int h = entete->bitmap.hauteur/2;
+  int hauteur = entete->bitmap.hauteur;
+  int dataSize = taille_ligne(entete) * h;
+  entete->bitmap.hauteur = h;
   entete->bitmap.taille_donnees_image = dataSize;
   entete->fichier.taille_fichier = dataSize + entete->fichier.offset_donnees;
-  if (!sup)
+  if (sup != 1){
     return;
-  unsigned char *psup = pixels + (entete->bitmap.hauteur - hauteurNew)*taille_ligne(entete);
-  memcpy(pixels, psup, hauteurNew*taille_ligne(entete));
-}*/
+  }
+  unsigned char *psup = pixels + (hauteur - h)*taille_ligne(entete);
+  memmove(pixels, psup, h*taille_ligne(entete));}
