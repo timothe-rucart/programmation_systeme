@@ -1,40 +1,79 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include <unistd.h>
-#include "tp6.h"
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
+#include "funct.h"
 
-int main(void)
-{
+int main(int argc, char * argv[]){
+	
+  int j;
+  int fd;
+  int vers;
   entete_bmp entete;
+  unsigned char *pixels;
 
-  int fd = open("test.bmp", O_RDONLY);
-
-  if(lire_entete(fd, &entete) == -1)
-  {
-    perror("Erreur lecture entete");
+  if(argc < 3){
+    printf("Wrong number of parameters\n");
+    printf("Usage: %s <bmp file> <bmp file>\n", argv[0]);
     return -1;
   }
 
-  printf("Lecture entete : \n");
-  // Lecture entete fichier
-  printf("Signature : 0x%x \n", entete.fichier.signature);
-  printf("Taille fichier : %d bytes \n", entete.fichier.taille_fichier);
-  printf("Reserve : %d \n", entete.fichier.reserve);
-  printf("DataOffset : %x \n", entete.fichier.offset_donnees);
+  fd = open(argv[argc-2], O_RDONLY);
 
-  // Lecture entete bmp
-  printf("Taille entete : %d \n", entete.bitmap.taille_entete);
-  printf("Taille Image : %dx%d \n", entete.bitmap.largeur, entete.bitmap.hauteur);
-  printf("Nombre plans : %d \n", entete.bitmap.nombre_plans);
-  printf("Profondeur : %d \n", entete.bitmap.profondeur);
-  printf("Compression : %d \n", entete.bitmap.compression);
-  printf("Taille donnees image : %d bytes \n", entete.bitmap.taille_donnees_image);
-  printf("Resolution : %dx%d ppm\n", entete.bitmap.resolution_horizontale, entete.bitmap.resolution_verticale);
-  printf("Taille palette : %d \n", entete.bitmap.taille_palette);
-  printf("Nombre de couleurs importantes : %d \n", entete.bitmap.nombre_de_couleurs_importantes);
+  if (fd == -1){
+    perror(argv[1]);
+    return -1;
+  }
 
- return 0; 
+  lire_entete(fd,&entete);
+  if(verifier_entete(&entete) == 0 ){
+    perror(argv[1]);
+    return -1;
+  }
+
+  pixels = allouer_pixels(&entete);
+  lire_pixels(fd, &entete, pixels);
+
+  if ((vers = open(argv[argc-1], O_WRONLY | O_CREAT | O_RDONLY, 0666 )) == -1){
+    perror(argv[1]);
+    return -1;
+  }
+
+  
+  
+  
+
+  if (fd == -1){
+    perror(argv[2]);
+    return -1;
+  }
+	
+  for ( j = 1; j < argc-2; j++) {
+		
+    if (argv[j][0] == '-' && argv[j][1] == 'r'){
+      rouge(&entete, pixels);
+    } else if (argv[j][0] == '-' && argv[j][1] == 'n'){
+      negatif(&entete, pixels);
+    } else if (argv[j][0] == '-' && argv[j][1] == 'b'){
+      noir_et_blanc(&entete, pixels);
+    } else if (argv[j][0] == '-' && argv[j][1] == 's'){
+      moitie(&entete, pixels, 1);
+    } else if (argv[j][0] == '-' && argv[j][1] == 'i'){
+      moitie(&entete, pixels, 8);
+    }
+  }
+
+ 
+
+  //affichage(&entete);
+  ecrire_entete(vers,&entete);
+  ecrire_pixels(vers,&entete,pixels);
+
+  free(pixels);
+
+  return 0;
 }
