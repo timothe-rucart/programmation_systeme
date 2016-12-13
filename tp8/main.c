@@ -4,5 +4,9 @@
 
 int main(void){
 	
+	while (1) {
+		exec_cmd();
+	}
+
 	return 0;
 }
