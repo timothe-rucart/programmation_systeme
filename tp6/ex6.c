@@ -51,31 +51,6 @@ void noir_et_blanc(entete_bmp *entete, unsigned char *pixels){
 }
 
 void moitie(entete_bmp *entete, unsigned char *pixels, int sup){
-  
-  /*int dataSize = entete->bitmap.taille_donnees_image;
-  int hauteur = entete->bitmap.hauteur;
-  int i = 0;
-  int j = 0;
-  int newSize = 0;
-
-  if (dataSize % 2 == 0){
-    newSize = (dataSize / 2);
-  }else{
-    newSize = (dataSize / 2);
-    newSize = (dataSize - newSize);
-  }
-  for(i = ((sup != 1) ? (0) : (newSize)); i < ((sup != 1) ? (newSize) : (dataSize)); i++)
-    {
-      pixels[j] = pixels[i];
-      j++;
-    }
-  entete->bitmap.taille_donnees_image = newSize;
-  hauteur = (hauteur / 2);
-  if (hauteur % 2 != 0){
-    hauteur = (entete->bitmap.hauteur - hauteur);
-  }
-  entete->bitmap.hauteur = hauteur;
-  entete->fichier.taille_fichier = newSize + entete->bitmap.taille_entete + (entete->fichier.offset_donnees - entete->bitmap.taille_entete);*/
 
 
   int h = entete->bitmap.hauteur/2;
